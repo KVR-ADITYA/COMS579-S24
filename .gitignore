@@ -1,2 +1,4 @@
 # rag/ is my virtual env folder
 rag/
+*__pycache__/*
+*keys*
