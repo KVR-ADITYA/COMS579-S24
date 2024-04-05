@@ -8,7 +8,8 @@ from llama_index.node_parser import SentenceSplitter
 from llama_index.ingestion import IngestionPipeline
 from llama_index.embeddings import HuggingFaceEmbedding
 from llama_index.node_parser import SemanticSplitterNodeParser
-from llama_index.core import settings
+
+from tqdm import tqdm
 
 # use llama_index version 0.9.29
 # Load Pinecone API key from environment variable
@@ -26,7 +27,8 @@ index_name = "llama-index-rag-nlp-coms579"
 if index_name not in pc.list_indexes().names():
     pc.create_index(
         name = index_name,
-        dimension=768,
+        dimension=384,  # since BAAI/bge-small-en-v1.5 has a dimension size of 384
+        #https://huggingface.co/BAAI/bge-small-en-v1.5
         metric="cosine",
         spec=PodSpec(environment="gcp-starter")
     )
@@ -58,12 +60,42 @@ def splitter_function(document, chunk_size = 128, overlap = 0.25):
     print(nodes[0])
     return nodes
 
+def create_embeddings(nodes):
+    #https://docs.llamaindex.ai/en/stable/examples/embeddings/huggingface/
+    embeddings = []
+    for i in tqdm(range(0, len(nodes), 1)):
+        embed = embed_model.get_text_embedding(nodes[i])
+        embeddings.append(embed)
+    print(len(nodes), len(embeddings))
+    return embeddings
+
+def upload_to_pinecone(embeddings, nodes):
+    index = pc.Index(index_name)
+    ids = [str(i) for i in range(len(nodes))]
+    index.upsert(vectors=list(zip(ids, embeddings)))
+    # batch_size = 1
+    # for i in tqdm(range(0, len(nodes), 1)):
+    #     # Adjust how you access the node ID and convert embeddings to list format
+        
+    #     node_id = str(nodes[i].get_id())  # Adjust .get_id() as necessary
+        
+    #     # Ensure embeddings[i] is in the correct format for Pinecone (usually a list of floats)
+    #     embedding = embeddings[i].tolist() if hasattr(embeddings[i], 'tolist') else embeddings[i]
+        
+    #     # Upsert the current node's ID and embedding to Pinecone
+    #     index.upsert(vectors=[(node_id, embedding)])
+    
+    print("Upload complete")
+
+
 
 
 
 
 read_pdf_file("Attention_is_all_you_need.pdf")
-splitter_function(read_pdf_file("Attention_is_all_you_need.pdf"))
+nodes = splitter_function(read_pdf_file("Attention_is_all_you_need.pdf"))
+embeddings = create_embeddings(nodes)
+upload_to_pinecone(embeddings, nodes)
 
 
 
