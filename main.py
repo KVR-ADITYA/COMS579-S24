@@ -29,7 +29,7 @@ def main():
 
 
 if __name__ == "__main__":
-    os.environ["PINECONE_API_KEY"] = "29e930bd-afd3-436a-8782-40d774866b10"
+    os.environ["PINECONE_API_KEY"] = ""
     # API access to llama-cloud
     os.environ["LLAMA_CLOUD_API_KEY"] = "llx-
 
