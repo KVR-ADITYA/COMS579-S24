@@ -12,7 +12,7 @@ from llama_index.node_parser import SemanticSplitterNodeParser
 from tqdm import tqdm
 import argparse
 
-# use llama_index version 0.9.29
+# use llama_index version 0.9.34
 # Load Pinecone API key from environment variable
 # api_key = os.environ.get("PINECONE_API_KEY")
 # if api_key is None:

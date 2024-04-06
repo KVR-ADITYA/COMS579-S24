@@ -1,6 +1,24 @@
 # COMS579-S24
 RAG - NLP Project for spring 2024 - COMS-579 - TEAM Members Aditya Kota and Ankush Kumar Mishra
 
+### Pipeline
+Llamaindex
+
+### Vector DB
+PineCone
+
+### UI
+Streamlit
+
+## Disclaimer
+Code written on Linux Machine with Cuda version 10.1.243
+To run on windows use Windows Subsytem for Linux (WSL)
+https://learn.microsoft.com/en-us/windows/wsl/about
+
+## Link to Video for Assignment 1
+
+https://www.youtube.com/watch?v=ICqOk5AEkuI
+
 ## Directory Structure
 ```
 your_project_directory/
