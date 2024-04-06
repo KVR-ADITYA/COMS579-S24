@@ -63,4 +63,4 @@ parser.add_argument("--chunk_size", type=int, default=128, help="Chunk size")
 parser.add_argument("--overlap", type=restricted_float, default=0.25, help="Overlap btw chunks as a fraction btw 0 and 1")
 ```
 
-
+Youtube Video for PDF upload - https://www.youtube.com/watch?v=ICqOk5AEkuI
