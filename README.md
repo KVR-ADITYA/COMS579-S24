@@ -15,9 +15,9 @@ In the current working directory there should be a "Docs" folder. The pdf file s
 
 ## Installation Instruction
 
-'
-pip install -r requirements.txt
-'
+
+'pip install -r requirements.txt'
+
 
 
 
