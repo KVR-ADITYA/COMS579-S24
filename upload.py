@@ -8,7 +8,6 @@ from llama_index.node_parser import SentenceSplitter
 from llama_index.ingestion import IngestionPipeline
 from llama_index.embeddings import HuggingFaceEmbedding
 from llama_index.node_parser import SemanticSplitterNodeParser
-import argparse
 
 from tqdm import tqdm
 
@@ -38,12 +37,11 @@ index_name = "llama-index-rag-nlp-coms579"
 if index_name not in pc.list_indexes().names():
     pc.create_index(
         name = index_name,
-        dimension=384,  # since BAAI/bge-small-en-v1.5 has a dimension size of 384
-        #https://huggingface.co/BAAI/bge-small-en-v1.5
+        dimension=768,
         metric="cosine",
         spec=PodSpec(environment="gcp-starter")
     )
-#embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 
 # Function to create a Pinecone index
 def create_pinecone_index(api_key, index_name):
@@ -83,35 +81,39 @@ def splitter_function(document, chunk_size = 128, overlap = 0.25):
     return nodes
 
 def create_embeddings(nodes):
-    embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
     #https://docs.llamaindex.ai/en/stable/examples/embeddings/huggingface/
     embeddings = []
     for i in tqdm(range(0, len(nodes), 1)):
         embed = embed_model.get_text_embedding(nodes[i])
         embeddings.append(embed)
-    print("Embeddings created successfully")
+    print(len(nodes), len(embeddings))
     return embeddings
 
-def upload_to_pinecone(nodes, index_name):
+def upload_to_pinecone(embeddings, nodes):
     index = pc.Index(index_name)
     ids = [str(i) for i in range(len(nodes))]
     index.upsert(vectors=list(zip(ids, embeddings)))
-    print("Upload to Pinecone DB complete")
-#pc, embeddings,
+    # batch_size = 1
+    # for i in tqdm(range(0, len(nodes), 1)):
+    #     # Adjust how you access the node ID and convert embeddings to list format
+        
+    #     node_id = str(nodes[i].get_id())  # Adjust .get_id() as necessary
+        
+    #     # Ensure embeddings[i] is in the correct format for Pinecone (usually a list of floats)
+    #     embedding = embeddings[i].tolist() if hasattr(embeddings[i], 'tolist') else embeddings[i]
+        
+    #     # Upsert the current node's ID and embedding to Pinecone
+    #     index.upsert(vectors=[(node_id, embedding)])
+    
+    print("Upload complete")
 
-# def main():
-#     parser = argparse.ArgumentParser(description="Set the pinecone API key in")
-#     parser = argparse.ArgumentParser(description="Upload pdf file t")
-#     parser  = argparse.ArgumentParser(description="Upload pdf file to Pinecone")
-#     parser.add_argument("file_name", help="Name of the pdf file")
+
 
 
 
 
 read_pdf_file("Attention_is_all_you_need.pdf")
-nodes = splitter_function(read_pdf_file("Attention_is_all_you_need.pdf"))
-embeddings = create_embeddings(nodes)
-upload_to_pinecone(embeddings, nodes)
+splitter_function(read_pdf_file("Attention_is_all_you_need.pdf"))
 
 
 
