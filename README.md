@@ -19,6 +19,10 @@ https://learn.microsoft.com/en-us/windows/wsl/about
 
 https://www.youtube.com/watch?v=ICqOk5AEkuI
 
+## Link to Video for Assignment 2
+
+https://youtu.be/s2puC6JEVyM
+
 ## Directory Structure
 ```
 your_project_directory/
