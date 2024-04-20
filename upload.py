@@ -3,11 +3,8 @@ import sys
 from pinecone import Pinecone, PodSpec
 import re
 from llama_index import VectorStoreIndex, SimpleDirectoryReader
-from llama_index.vector_stores.pinecone import PineconeVectorStore
-from llama_index.node_parser import SentenceSplitter
-from llama_index.ingestion import IngestionPipeline
+from llama_index.core.node_parser import SentenceSplitter
 from llama_index.embeddings import HuggingFaceEmbedding
-from llama_index.node_parser import SemanticSplitterNodeParser
 
 from tqdm import tqdm
 import argparse

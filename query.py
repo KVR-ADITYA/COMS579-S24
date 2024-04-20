@@ -174,7 +174,7 @@ def main():
 
 
 
-    print(query_result.to_str())
+    # print(query_result.to_str())
 
     # print("Query Result: " + str(query_result))
     _nodes= []
@@ -182,12 +182,11 @@ def main():
     print("Retrieval")
     print("top-k :", top_k)
     for i, _t in enumerate(query_result['matches']):
-        print("-------------",i ,"-------------")
+        print(i, end=':  ')
         # print(_t)
         _node =IndexNode.from_text_node(TextNode(text=_t['metadata']['text']), _t['id'])
         _nodes.append(_node)
         print("Similarity: ", _t['score'])
-        print("Context:", _node.text)
         print("---------------------------")
         
     print(_nodes)
