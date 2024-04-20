@@ -119,7 +119,7 @@ def main():
     parser = argparse.ArgumentParser(description="queries on the uploaded document")
     parser.add_argument("--api_key", type=str, required=True, help="Pinecone API key")
     parser.add_argument("--query", type=str, required=True, help="query regarding the pdf")
-    parser.add_argument("--top_k", type=int, default=128, help="The number of top K documents to be considered")
+    parser.add_argument("--top_k", type=int, default=5, help="The number of top K documents to be considered")
     args = parser.parse_args()
     query = args.query
     top_k = args.top_k
