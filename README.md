@@ -84,3 +84,19 @@ parser.add_argument("--file_name", type=str, required=True, help="PDF file name"
 parser.add_argument("--chunk_size", type=int, default=128, help="Chunk size")
 parser.add_argument("--overlap", type=restricted_float, default=0.25, help="Overlap btw chunks as a fraction btw 0 and 1")
 ```
+Once you have uploaded the pdf as a Vector Database to Pincone the next step is to continue with asking queries to the RAG Model. This can be done by running the `query.py` file.
+## How to run from Terminal
+
+### Required Arguments
+
+**--api_key**
+Your Pinecone API key.
+
+**--query**
+The user query about the pdf.
+
+### Optional Arguments
+
+**--top_k**
+Parameter for the retriever to fetch top k documents. Default = 5
+`python3 query.py --api_key=29e930bd-afd3-436a-8782-40d774866b10 --query="What is a transformer?" --top_k=5`
