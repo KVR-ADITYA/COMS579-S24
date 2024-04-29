@@ -96,7 +96,8 @@ def create_embeddings(nodes):
 def upload_to_pinecone(pc, index_name, embeddings, nodes):
     index = pc.Index(index_name)
     ids = [str(i) for i in range(len(nodes))]
-    index.upsert(vectors=list(zip(ids, embeddings)))
+    # index.upsert(vectors=list(zip(ids, embeddings)))
+    index.upsert(vectors=[(node.metadata['file_name'][:2]+node.metadata['page_label'], emb, {'text': node.text}) for node, emb in zip(nodes,embeddings)])
     print("Upload complete")
 
 # Custom type function for overlap
