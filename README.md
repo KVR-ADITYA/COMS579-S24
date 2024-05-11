@@ -108,5 +108,7 @@ Parameter for the retriever to fetch top k documents. Default = 5
 ## How to run from Terminal
 
 `python3 -m streamlit run RAG_app.py`
+Open the link that appears on the terminal in the browser and provide required information, For reference follow this image - 
+![alt text](Images/RAG-GUI.png "RAG-GUI")
 
 
