@@ -23,6 +23,10 @@ https://www.youtube.com/watch?v=ICqOk5AEkuI
 
 https://youtu.be/s2puC6JEVyM
 
+## Link to Video for Assignment 2
+
+https://www.youtube.com/watch?v=O6wz8kwuHT8
+
 ## Directory Structure
 ```
 your_project_directory/
@@ -100,3 +104,9 @@ The user query about the pdf.
 **--top_k**
 Parameter for the retriever to fetch top k documents. Default = 5
 `python3 query.py --api_key=29e930bd-afd3-436a-8782-40d774866b10 --query="What is a transformer?" --top_k=5`
+
+## How to run from Terminal
+
+`python3 -m streamlit run RAG_app.py`
+
+
