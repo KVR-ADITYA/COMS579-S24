@@ -23,7 +23,7 @@ https://www.youtube.com/watch?v=ICqOk5AEkuI
 
 https://youtu.be/s2puC6JEVyM
 
-## Link to Video for Assignment 2
+## Link to Video for Assignment 3
 
 https://www.youtube.com/watch?v=O6wz8kwuHT8
 
