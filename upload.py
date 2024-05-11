@@ -2,11 +2,11 @@ import os
 import sys
 from pinecone import Pinecone, PodSpec
 import re
-from llama_index.legacy import VectorStoreIndex, SimpleDirectoryReader
+from llama_index.legacy import SimpleDirectoryReader
 # from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.legacy.node_parser import SentenceSplitter
 # from llama_index.ingestion import IngestionPipeline
-from llama_index.legacy.embeddings import HuggingFaceEmbedding
+from llama_index.legacy.embeddings import HuggingFaceEmbedding as HFE
 # from llama_index.node_parser import SemanticSplitterNodeParser
 
 from tqdm import tqdm
@@ -44,7 +44,7 @@ import argparse
 #         spec=PodSpec(environment="gcp-starter")
 #     )
 
-embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+embed_model = HFE(model_name="BAAI/bge-small-en-v1.5")
 index_name = "llama-index-rag-nlp-coms579"
 
 # Function to create a Pinecone index
